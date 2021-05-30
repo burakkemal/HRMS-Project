@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -36,6 +37,7 @@ public class JobAdvertisement {
 	@Column(name = "id")
 	private int id;
 	
+	@NotBlank(message = "Açıklama kısmı boş geçilemez.")
 	@Column(name = "description")
 	private String description;
 	
@@ -45,6 +47,7 @@ public class JobAdvertisement {
 	@Column(name = "max_salary")
 	private double maxSalary;
 	
+	@NotBlank(message = "Is pozisyon adedi bos birakilamaz!")
 	@Column(name = "open_position_number")
 	private int openPositonNumber;
 	 
@@ -67,14 +70,17 @@ public class JobAdvertisement {
 	@Column(name = "is_active")
 	private boolean isActive;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "jobTitle_id")
 	private JobTitle jobTitle;
+	
 	
 	@ManyToOne()
 	@JoinColumn(name = "city_id")
 	private City city;
 	
+
 	@ManyToOne
 	@JoinColumn(name = "employer_id")
 	private Employer employer;

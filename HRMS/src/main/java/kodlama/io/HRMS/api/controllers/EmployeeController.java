@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kodlama.io.HRMS.business.abstracts.EmployeeService;
 import kodlama.io.HRMS.business.abstracts.JobService;
 import kodlama.io.HRMS.core.utilities.results.DataResult;
+import kodlama.io.HRMS.core.utilities.results.Result;
 import kodlama.io.HRMS.entities.concretes.Employee;
 import kodlama.io.HRMS.entities.concretes.JobTitle;
 
@@ -30,7 +31,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/getall")
-	public List<Employee> getAll() {
+	public DataResult<List<Employee>>  getAll() {
 
 		return this.systemUserService.GetAll();
 	}
@@ -49,6 +50,12 @@ public class EmployeeController {
 	@GetMapping("/getJobTitle")
 	public DataResult<List<JobTitle>>  getJobTitle() {
 		return this.jobService.getAll();
+	}
+	
+	@PostMapping("activedEmpoleye2")
+	public Result activedEmpoleye2(int id,boolean active) {
+		
+		return systemUserService.updateActive(id,active);
 	}
 	
 }

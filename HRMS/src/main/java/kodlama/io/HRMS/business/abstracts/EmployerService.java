@@ -11,5 +11,7 @@ public interface EmployerService {
 	Result add(Employer employer);
 	Result activeEmployee(int employyerId);
 	
+	Result employeeConfirm(int employeeId,boolean active);
+	
 	
 }

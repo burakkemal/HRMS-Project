@@ -23,37 +23,42 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 		super();
 		this.jobAdvertisementdao = jobAdvertisementdao;
 	}
-
+	//ekleme
 	@Override
 	public Result add(JobAdvertisement jobadvertisement) {
 		this.jobAdvertisementdao.save(jobadvertisement);
-		return new SuccessResult();
+		return new SuccessResult("Eklendi");
 	}
 
+	//listeleme
 	@Override
 	public DataResult<List<JobAdvertisement>> getAll() {
 
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementdao.findAll());
 	}
 
+	//aktif iş ilanları
 	@Override
 	public DataResult<List<JobAdvertisement>> findByIsActiveTrue() {
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementdao.findByIsActiveTrue(),
 				"Aktif ilanlar listelendi");
 	}
 
+	//aktif iş ilanlarının tarihe göre listelenmesi
 	@Override
 	public DataResult<List<JobAdvertisement>> findByIsActiveTrueOrderByCreationDate() {
 		return new SuccessDataResult<List<JobAdvertisement>>(
 				jobAdvertisementdao.findByIsActiveTrueOrderByCreationDateDesc());
 	}
 
+	// aktif iş verene ait iş ilanları
 	@Override
 	public DataResult<List<JobAdvertisement>> findByIsActiveTrueAndEmployerId(int employerId) {
 		return new SuccessDataResult<List<JobAdvertisement>>(
 				jobAdvertisementdao.findByIsActiveTrueAndEmployerId(employerId));
 	}
 
+	//iş ilanını pasif hale getirme
 	@Override
 	public Result setValueOfActive(int id, boolean active) {
 		JobAdvertisement jobAdvertisement=this.jobAdvertisementdao.findById(id).orElse(null);

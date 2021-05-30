@@ -41,12 +41,14 @@ public class EmployerManager implements EmployerService {
 			employerDao.save(employer);
 			return new SuccessResult("Kayıt Başarılı");
 		}
+		//boş geçilen alanların kontrolü
 		private Result nullCheck(Employer employer) {
 			if (employer.getCompanyName().isEmpty()||employer.getMail().isEmpty()||employer.getWebAdress().isEmpty()) {
 				return new ErrorResult("Bu alanlar boş geçilemez");
 			}
 			return new SuccessResult();
 		}
+		//email kontrol
 		private Result checkEmail(String mail) {
 			if (this.employerDao.findByMailContaining(mail).isEmpty()) {
 				return new SuccessResult();
@@ -54,6 +56,7 @@ public class EmployerManager implements EmployerService {
 			return new ErrorResult("Bu E-posta kullanılıyor");
 		}
 
+		//iş veren onayı
 		@Override
 		public Result activeEmployee(int employyerId) {
 			this.employerDao.activeEmployer(employyerId);
@@ -66,6 +69,19 @@ public class EmployerManager implements EmployerService {
 			}
 			return new ErrorResult("Şifreler uyuşmuyor");
 		}
+
+		
+		//iş veren onayı için 
+		@Override
+		public Result employeeConfirm(int employeeId, boolean active) {
+			
+			Employer employer=this.employerDao.findById(employeeId).orElse(null);
+			employer.setVerify(active);
+			this.employerDao.save(employer);
+			return new SuccessResult("Güncellendi");
+			
+		}
+		
 
 		
 }
