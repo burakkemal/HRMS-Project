@@ -13,6 +13,7 @@ import kodlama.io.HRMS.business.abstracts.CandidateService;
 import kodlama.io.HRMS.core.utilities.results.DataResult;
 import kodlama.io.HRMS.core.utilities.results.Result;
 import kodlama.io.HRMS.entities.concretes.Candidate;
+import kodlama.io.HRMS.entities.dtos.CvDetailDto;
 
 @RestController
 @RequestMapping(name = "/api/candidate")
@@ -32,6 +33,11 @@ public class CandidateController {
 	@PostMapping(name = "/add")
 	public Result add(@RequestBody Candidate candidate) {
 		return this.candidateService.add(candidate);
+	}
+	
+	@GetMapping("/getDetailByCandidateCv")
+	public DataResult<CvDetailDto> getDetailCandidateCv(int candidateId){
+		return this.candidateService.getDetailCandidateeCv(candidateId);
 	}
 	
 }
