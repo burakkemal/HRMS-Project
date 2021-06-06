@@ -13,8 +13,6 @@ import kodlama.io.HRMS.core.utilities.results.SuccessDataResult;
 import kodlama.io.HRMS.core.utilities.results.SuccessResult;
 import kodlama.io.HRMS.dataAccess.abstracts.EmployeeDao;
 import kodlama.io.HRMS.entities.concretes.Employee;
-import kodlama.io.HRMS.entities.concretes.Employer;
-import kodlama.io.HRMS.entities.concretes.JobAdvertisement;
 
 @Service
 public class EmployeeManager  implements EmployeeService{
